@@ -1,0 +1,43 @@
+# Remote Claude Pocket settings.
+# Copy to ~/.config/remote-claude-pocket/config.toml (install.sh does it).
+
+# Language of the bot replies: "en" or "es". Commands work in both.
+language = "en"
+
+# Folder whose subfolders are your projects.
+projects_dir = "~/projects"
+
+# Subfolders that never show up in the bot.
+hidden_projects = []
+
+# Path to the claude binary. Empty = look it up in PATH.
+claude_bin = ""
+
+# Start each session with --remote-control so it appears in the Claude
+# app (claude.ai/code and the iOS/Android app).
+remote_control = true
+
+# Start Claude with --dangerously-skip-permissions. Claude will run any
+# command without asking. Only turn this on if you understand the risk.
+skip_permissions = false
+
+# Answer "Yes" to Claude's folder-trust prompt when opening a project.
+auto_trust = true
+
+# Allow "reboot server" and "shutdown server". Needs the polkit rule in
+# extras/ (or equivalent) so your user can run systemctl reboot/poweroff.
+power_commands = false
+
+# Warn when a session shows no change for this many hours (0 = never).
+inactivity_hours = 24
+
+# Optional health checks, shown in "status" and alerted every 5 minutes.
+tailscale = false
+
+# [[checks]]
+# name = "My web app"
+# url = "http://127.0.0.1:8000/healthz"
+
+# A file with an ISO timestamp (or just touched) by your backup job.
+# backup_stamp = "~/.local/state/my-backup/last-success"
+# backup_max_hours = 36

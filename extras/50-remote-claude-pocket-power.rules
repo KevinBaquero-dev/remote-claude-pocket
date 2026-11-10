@@ -1,0 +1,14 @@
+// Lets USERNAME reboot and power off without a password, so the bot's
+// "reboot server" / "shutdown server" work. Grants nothing else.
+// Replace USERNAME, then: sudo cp this file /etc/polkit-1/rules.d/
+polkit.addRule(function(action, subject) {
+    var actions = [
+        "org.freedesktop.login1.reboot",
+        "org.freedesktop.login1.reboot-multiple-sessions",
+        "org.freedesktop.login1.power-off",
+        "org.freedesktop.login1.power-off-multiple-sessions"
+    ];
+    if (subject.user == "USERNAME" && actions.indexOf(action.id) >= 0) {
+        return polkit.Result.YES;
+    }
+});

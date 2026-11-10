@@ -1,0 +1,16 @@
+[Unit]
+Description=Remote Claude Pocket (Telegram bot for Claude Code)
+After=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+WorkingDirectory=%h/remote-claude-pocket
+ExecStart=%h/remote-claude-pocket/.venv/bin/python -m pocket
+Environment=PYTHONUNBUFFERED=1
+Environment=PATH=%h/.local/bin:/usr/local/bin:/usr/bin:/bin
+Environment=LANG=C.UTF-8
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target
