@@ -4,6 +4,8 @@
 
 Corre Claude Code en tu propio servidor y manéjalo desde el celular por Telegram.
 
+<p align="center"><img src="docs/demo.gif" width="300" alt="Abriendo Claude Code en un proyecto, viendo su pantalla y revisando el servidor desde Telegram"></p>
+
 Escribes `abre miapp` y el bot arranca Claude Code en ese proyecto dentro de tmux, con el control remoto activado. La sesión aparece en la app de Claude (claude.ai/code, iOS o Android) y sigues trabajando desde ahí. El bot además vigila tus sesiones y te escribe cuando alguna te necesita.
 
 Está pensado para una persona con un servidor (un equipo en casa, un VPS, un portátil viejo) que trabaja remoto y muchas veces desde el celular.
