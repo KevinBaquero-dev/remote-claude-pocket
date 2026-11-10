@@ -457,7 +457,12 @@ async def post_init(app):
         text = t("bot_restarted", t=now)
     if d:
         text += "\n" + t("open_count", n=len(d))
-    await app.bot.send_message(cfg().allowed_user_id, text, reply_markup=menu())
+    try:
+        await app.bot.send_message(cfg().allowed_user_id, text, reply_markup=menu())
+    except BadRequest as e:
+        # Telegram won't let a bot message you until you send it /start.
+        log.warning("Could not message user %s (%s). Send /start to the bot.",
+                    cfg().allowed_user_id, e)
     jq = app.job_queue
     if cfg().hc_ping_url:
         jq.run_repeating(job_ping, 300, first=5)

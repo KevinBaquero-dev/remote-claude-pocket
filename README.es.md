@@ -42,7 +42,7 @@ Después:
 3. Arráncalo con `systemctl --user enable --now remote-claude-pocket`.
 4. Para que siga corriendo cuando cierres sesión: `loginctl enable-linger $USER`.
 
-Escríbele `ayuda` a tu bot. Logs: `journalctl --user -u remote-claude-pocket -f`.
+Abre tu bot en Telegram y mándale `/start` (Telegram no deja que un bot te escriba primero). Logs: `journalctl --user -u remote-claude-pocket -f`.
 
 ## Configuración
 
