@@ -60,16 +60,19 @@ def forget_missing(names):
 
 
 TRUST_RX = re.compile(r"accessing workspace|trust (the files in )?this folder", re.I)
-YES_OPTION_RX = re.compile(r"^\s*❯?\s*(\d+)\.\s+Yes\b", re.I)
+CURSOR_RX = re.compile(r"^\s*[❯›>]\s")
+YES_RX = re.compile(r"^\s*([❯›>]\s*)?(\d+\.\s+)?Yes\b", re.I)
 
 
 def trust_downs(screen):
-    """If the folder-trust prompt is on screen, how many Down presses reach
-    the "Yes" option (the cursor starts on option 1). None otherwise."""
+    """If the folder-trust prompt is on screen, how many Down presses move
+    the cursor to the "Yes" option (negative = Up). None otherwise.
+    Works with numbered ("1. Yes") and unnumbered menus."""
     if not TRUST_RX.search(screen):
         return None
-    for line in screen.splitlines():
-        m = YES_OPTION_RX.match(line)
-        if m:
-            return int(m.group(1)) - 1
-    return None
+    lines = screen.splitlines()
+    cursor = next((i for i, l in enumerate(lines) if CURSOR_RX.match(l)), None)
+    yes = next((i for i, l in enumerate(lines) if YES_RX.match(l)), None)
+    if cursor is None or yes is None:
+        return None
+    return yes - cursor

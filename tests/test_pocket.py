@@ -137,6 +137,10 @@ def test_trust_prompt():
              "❯ 1. Yes, proceed\n  2. No, exit")
     assert monitor.trust_downs(bypass) == 1
     assert monitor.trust_downs(trust) == 0
+    unnumbered = ("Accessing workspace:\n /home/u/p\n Quick safety check: Is this a "
+                  "project you created or one you trust?\n Security guide\n"
+                  " ❯ No, exit\n   Yes, I trust this folder\n Enter to confirm")
+    assert monitor.trust_downs(unnumbered) == 1
     assert monitor.trust_downs("❯ 1. Yes") is None
 
 

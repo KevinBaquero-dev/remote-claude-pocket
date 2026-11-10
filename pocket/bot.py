@@ -97,8 +97,8 @@ async def open_project(msg, project):
         if downs is not None:
             trusted = True
             await edit(msg, t("trusting", b=b))
-            for _ in range(downs):
-                tmuxctl.keys(name, "Down")
+            for _ in range(abs(downs)):
+                tmuxctl.keys(name, "Down" if downs > 0 else "Up")
                 await asyncio.sleep(0.2)
             tmuxctl.keys(name, "Enter")
         if not cfg().remote_control and i >= 4 and "❯" in p:
